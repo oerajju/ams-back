@@ -1,0 +1,91 @@
+<div class="animated fadeIn">
+    <div class="row">
+        
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Received Tickets
+                </div>
+                <div class="card-block">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Reference No.</th>
+                                <th>Reference Date</th>
+                                <th>Transaction Date</th>
+                                <th>Tickets</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat = "orgn in trnsr.transList">
+                               
+                                <td>{{ orgn.ref_no }}</td>
+                                <td>{{ orgn.ref_date }}</td>
+                                <td>{{ orgn.trans_date_nep }}</td>
+                                <td>{{ orgn.tickets }}</td>
+                                <td></td>
+                                <td>
+                                    <div class="row">
+                                    <button class="btn btn-info btn-sm pull-left" title="Add Date" ng-click="trnsr.editForm(orgn.id,orgn.trans_comp_date_nep)"><i class="icon-pencil"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <ul uib-pagination 
+                        boundary-links="true" 
+                        total-items="trnsr.totalItems" 
+                        ng-model="trnsr.currentPage"
+                        items-per-page="trnsr.perPage"
+                        class="pagination-sm col-md-9"
+                        ng-change ="trnsr.getOrgList()"
+                        previous-text="&lsaquo;" 
+                        next-text="&rsaquo;" 
+                        first-text="&laquo;" 
+                        last-text="&raquo;">
+                    </ul>
+                        <div class="form-group col-md-3"></div>
+                        <label class="form-group">Per Page</label>
+                        <select ng-model="trnsr.reqPerPage" ng-change="trnsr.getOrgList()" 
+                                ng-init="trnsr.reqPerPage = trnsr.perPageOptions[0]"
+                                ng-options="item for item in trnsr.perPageOptions">
+                            <option value="" style="display: none"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    Ticket Transactions
+                </div>
+                <div class="card-block">
+                    <form class="form-horizontal" ng-submit="trnsr.addRecDate()">
+                        <input type="hidden" ng-model="trnsr.tmid">
+                        <div class="form-group row">
+                            <label class="col-md-4 form-control-label" for="text-input">Transaction Date</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="trnsr.trans_comp_date_nep" id="trans-date">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <button type="submit" class="form-control btn btn-primary" >Submit</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="reset" class="form-control btn btn-danger" ng-click="trnsr.resetForm();">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/row-->
+</div>
+<script>
+    createcalendar(document.getElementById("trans-date"));
+</script>

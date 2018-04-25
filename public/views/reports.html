@@ -1,0 +1,89 @@
+<div class="animated fadeIn">
+    <div class="row">
+        
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    Reports
+                </div>
+                <div class="card-block">
+                    <form id="ext-load" name="search-form" fa-ng-submit="rps.getReport()" method="post" action="transaction/get-report" target="_blank">
+                    
+                        <div class="form-group row">
+                            <label class="col-md-2 form-control-label" for="text-input">Fiscal Year</label>
+                            <div class="col-md-4">
+                                <select class="form-control" placeholder="Organization" name="fy"
+                                        ng-options="item as (item + '/' + ((item+1).toString().substring(2))) for item in rps.years track by item" ng-model="rps.sYear">
+                                    <option value="" >Year</option>
+                                </select>
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-control" placeholder="Organization" name="month"
+                                        ng-options="value as key for (key,value) in rps.months track by value" ng-model="rps.sMonth">
+                                    <option value="" >Month</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Type</label>
+                            <div class="col-md-9">
+                                <select class="form-control" placeholder="Type" name="rep_type"
+                                        ng-model="rps.rep_type" ng-change="">
+                                    <option value="">Report Type</option>
+                                    <option value="monthwise">Months in Row</option>
+                                    <option value="ratewise">Rate in Row</option>
+                                    <option value="userwise">User Wise</option>
+                                    <option value="orgwise">Organization Wise</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Prepared By</label>
+                            <div class="col-md-9">
+                                <select class="form-control" placeholder="Darbandi" name="darbandi_p"
+                                        ng-model="rps.darbandi_id_p" ng-change=""
+                                        ng-options="item.id as (item.post_name+'|'+item.level_name+'|'+ (item.uname==null?'(---)':item.uname)) for item in rps.darbandis track by item.id">
+                                    <option value="">Prepared By</option>
+                                </select>
+                            </div>
+                        </div>
+                            <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Approved By</label>
+                            <div class="col-md-9">
+                                <select class="form-control" placeholder="Darbandi" name="darbandi_a"
+                                        ng-model="rps.darbandi_id_a" ng-change=""
+                                        ng-options="item.id as (item.post_name+'|'+item.level_name+'|'+ (item.uname==null?'(---)':item.uname)) for item in rps.darbandis track by item.id">
+                                    <option value="">Approved By</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 form-control-label" for="text-input">Date</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="rps.trans_date" name="date" id="trans-date">
+                            </div>
+                        </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/row-->
+    <div class="row">
+        <div class="container" ng-bind-html ="rps.rep">
+            Loading ..
+        </div>
+    </div>
+</div>
+<script>
+    createcalendar(document.getElementById("trans-date"));
+    $('#ext-load').attr('action','transaction/get-report?token='+localStorage.satellizer_token);
+</script>

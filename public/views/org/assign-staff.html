@@ -1,0 +1,58 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    Assign Employee To a Post(Level)
+                </div>
+                <div class="card-block">
+                    <form class="form-horizontal" name="orgForm" novalidate angular-validator-submit="astf.submitForm()"  angular-validator>
+                        
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Organizaion</label>
+                            <div class="col-md-9">
+                                <select class="form-control" placeholder="Organization" name="organization"
+                                        ng-model="astf.formModel.org_id" ng-change="astf.orgChange()"
+                                        ng-options="item.id as item.name for item in astf.orgs">
+                                    <option value="">Select Organization</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Darbandi</label>
+                            <div class="col-md-9">
+                                <select class="form-control" placeholder="Darbandi" name="darbandi"
+                                        ng-model="astf.formModel.darbandi_id" ng-change=""
+                                        ng-options="item.id as (item.post_name+'|'+item.level_name+'|'+ (item.uname==null?'(---)':item.uname)) for item in astf.darbandis">
+                                    <option value="">Select Darbandi</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Staff</label>
+                            <div class="col-md-9">
+                                <select class="form-control" placeholder="Staff" name="staff"
+                                        ng-model="astf.formModel.staff_id"
+                                        ng-options="item.id as item.name for item in astf.staffs">
+                                    <option value="">Select Staff</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <button type="submit" class="form-control btn btn-primary" >Submit</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="reset" class="form-control btn btn-danger" ng-click="astf.resetForm();orgForm.reset();">Reset</button>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+</div>

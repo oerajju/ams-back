@@ -1,0 +1,262 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    Create Organizations
+                </div>
+                <div class="card-block">
+                    <form class="form-horizontal" name="orgForm" novalidate angular-validator-submit="org.submitForm()"  angular-validator>
+                        <input type="hidden" ng-model="org.formModel.id">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Name</label>
+                            <div class="col-md-6">
+                                <input type="text"   class="form-control" placeholder="Name" ng-model="org.formModel.name" required required-message="'Name is required.'" validate-on="blur" name="name">
+                            </div>
+                            <label class="col-md-1 form-control-label" for="text-input">Hide</label>
+                            <div class="col-md-2">
+                                <input type="checkbox"   class="form-control" ng-model="org.formModel.hide_name" name="hide_name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Alternative Name</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Alternative Name" ng-model="org.formModel.alt_name" name="alt_name">
+                            </div>
+                            
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Organization Category</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="org_type"
+                                        ng-model="org.formModel.name"
+                                        ng-options="item.id as (item.name) for item in org.OrgTypeList">
+                                        <option value="">Select Category..</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Ownership Type</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="ownership"
+                                        ng-model="org.formModel.ownership"
+                                        ng-options="item.id as item.name for item in org.ownershipList">
+                                    <option value="">Select Ownership..</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Organization Size</label>
+                            <div class="col-md-9">
+                                <select class="form-control" placeholder="District" name="size_of_org"
+                                        ng-model="org.formModel.size_of_org"
+                                        ng-options="item.id as (item.name) for item in org.orgSizeList">
+                                        <option value="">Select Org Size..</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Logo(sizeXsize)</label>
+                            <div class="col-md-9">
+                                <input type="file" name="logo">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Cover Photo(sizeXsize)</label>
+                            <div class="col-md-9">
+                                <input type="file" name="cover_photo">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Country</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="country"
+                                        ng-model="org.formModel.country"
+                                        ng-options="item.id as (item.name) for item in org.countryList">
+                                        <option value="">Select Country..</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">City</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="city"
+                                        ng-model="org.formModel.district"
+                                        ng-options="item.id as (item.name) for item in org.cityList">
+                                        <option value="">Select City..</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Address</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Address" ng-model="org.formModel.address" required name="address">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Phone</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Phone" ng-model="org.formModel.phone" required name="phone">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Fax</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Fax" ng-model="org.formModel.fax" name="fax">
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Pobox No.</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Phone" ng-model="org.formModel.post_box_no" required name="post_box_no">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Email</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Email" ng-model="org.formModel.email" name="email">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Alternative Email</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Email" ng-model="org.formModel.alternate_email" name="email">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Website</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Website" ng-model="org.formModel.website" name="website">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Contact Person Salutation</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="cs" ng-model="org.formModel.cs" name="cs">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Name</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Name" ng-model="org.formModel.cname" name="cname">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Email</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Email" ng-model="org.formModel.cemail" name="website">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Phone</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Phone/Mobile" ng-model="org.formModel.cphone" name="cphone">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <button type="submit" class="form-control btn btn-primary" >Submit</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="reset" class="form-control btn btn-danger" ng-click="org.resetForm();orgForm.reset();">Reset</button>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--/col-->
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Organization List
+                </div>
+                <div class="card-block">
+                    <form name="search-form" ng-submit="org.getOrgList()">
+                    <div class="form-group row">
+                            <label class="col-md-2 form-control-label" for="text-input">Search</label>
+                            <div class="col-md-5">
+                                <select class="form-control" placeholder="Search" name="search-option"
+                                        ng-model="org.searchOption"
+                                        ng-options="item as item.toUpperCase() for item in org.searchable"
+                                        ng-init="org.searchOption=org.searchable[0]">
+                                    <option value="" style="display:none">Choose One</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" name="srch-term" ng-model="org.searchTerm">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Code</th>
+                                <th>Phone No.</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat = "orgn in org.orgList">
+                                <td>{{ orgn.name }}</td>
+                                <td>{{ orgn.code }}</td>
+                                <td>{{ orgn.phone_no }}</td>
+                                <td>{{ orgn.email }}</td>
+                                <td>
+                                    <div class="row">
+                                    <button class="btn btn-info btn-sm pull-left" title="Edit" ng-click="org.editForm(orgn.id)"><i class="icon-pencil"></i></button>
+                                    <button class="btn btn-danger btn-sm pull-left" title="Delete" style="margin-left: 4px;"><i class="icon-trash icon-white"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <ul uib-pagination 
+                        boundary-links="true" 
+                        total-items="org.totalItems" 
+                        ng-model="org.currentPage"
+                        items-per-page="org.perPage"
+                        class="pagination-sm col-md-9"
+                        ng-change ="org.getOrgList()"
+                        previous-text="&lsaquo;" 
+                        next-text="&rsaquo;" 
+                        first-text="&laquo;" 
+                        last-text="&raquo;">
+                    </ul>
+                        <div class="form-group col-md-3"></div>
+                        <label class="form-group">Per Page</label>
+                        <select ng-model="org.reqPerPage" ng-change="org.getOrgList()" 
+                                ng-init="org.reqPerPage = org.perPageOptions[0]"
+                                ng-options="item for item in org.perPageOptions">
+                            <option value="" style="display: none"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+</div>

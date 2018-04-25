@@ -1,0 +1,34 @@
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.main"><i class="icon-speedometer"></i> Dashboard </a>
+            </li>
+
+            <li class="divider"></li>
+            <!--Our Custom Menu-->
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.office')}" ng-show="mc.checkPermissions('office')">
+                <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.office')}" href="#"> Office Setup</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.office.organization"> Organizaton</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.office.ownership"> Org. Ownership</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.office.type"> Org. Type</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.office.size"> Org. Size</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="divider"></li>
+            <!--Our Custom Menu-->
+            <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.transaction"> Transaction</a>
+            </li>
+        </ul>
+    </nav>
+</div>

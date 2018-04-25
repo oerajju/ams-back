@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 22, 2017, 11:02:07 AM
+    Author     : user
+*/
+body{
+    font-size: 10px ;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+	align:center;
+}
+th, td {
+        padding-left: 20px;
+    padding-right: 20px;
+}
+        
+}
+@media print and (-webkit-min-device-pixel-ratio:0)
+            {
+                
+            }
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+    /*Chrome CSS here*/
+
+    
+}
+ @media print
+   {
+      .print {
+          margin-left: 10px;
+      }
+   }

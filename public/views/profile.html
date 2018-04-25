@@ -1,0 +1,58 @@
+<div class="animated fadeIn">
+    <div class="row">
+
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    Profile {{pfl.user.name}}
+                </div>
+                <div class="card-block">
+                  <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                        <td>Name</td>
+                        <td>{{pfl.user.name}}</td>
+                      </tr>
+                        <tr>
+                        <td>Email</td>
+                        <td>{{pfl.user.email}}</td>
+                      </tr>
+                      <tr>
+                        <td>Phone</td>
+                        <td>{{pfl.user.phone}}</td>
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Change Password
+                </div>
+                <div class="card-block">
+                    <form class="form-horizontal col-md-6" ng-submit="pfl.changePassword()">
+                        <div class="form-group">
+                            <input class="form-control" type="password" ng-model="pfl.old_password" placeholder="Old Password">
+                            
+                        </div>
+                        <div class="form-group">
+                            
+                            <input class="form-control" type="password" ng-model="pfl.new_password" placeholder="New Password">
+                            
+                        </div>
+                        <div class="form-group">
+                            
+                            <input class="form-control" type="password" ng-model="pfl.cnew_password" placeholder="Confirm Password">
+                            
+                        </div>
+                        <div class="form-group">
+                            
+                            <input class="btn btn-success" type="submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

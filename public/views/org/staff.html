@@ -1,0 +1,166 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    Create Employee
+                </div>
+                <div class="card-block">
+                    <form class="form-horizontal" name="orgForm" novalidate angular-validator-submit="stf.submitForm()"  angular-validator>
+                        <input type="hidden" ng-model="stf.formModel.id">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Pis No.</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="PIS No." ng-model="stf.formModel.pis_no" required required-message="'PIS No. is required.'" validate-on="blur" name="pis_no">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Name</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Name" ng-model="stf.formModel.name" required required-message="'Name is required.'" validate-on="blur" name="name">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Email</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Email" ng-model="stf.formModel.email" name="email">
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Phone</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Phone" ng-model="stf.formModel.phone_no" required name="phone">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Mobile</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Mobile" ng-model="stf.formModel.mobile_no" name="fax">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Address</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Address" ng-model="stf.formModel.address" required name="address">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                             <label class="col-md-3 form-control-label" for="text-input">Gender</label>
+                             <div class="col-md-9">
+                                <div class="radio">
+                                   <label><input type="radio" name="gender" value="MALE" ng-model="stf.formModel.gender">Male</label>
+                                   <label><input type="radio" name="gender"   value="FEMALE" ng-model="stf.formModel.gender">Female</label>
+                               </div>
+                             </div>
+                        </div>
+                        <div class="form-group row">
+                             <label class="col-md-3 form-control-label" for="text-input"> Password</label>
+                             <div class="col-md-9">
+                                   <label><input type="checkbox" name="crpassword" ng-model="stf.formModel.crpassword"> Create/Reset </label>
+                           
+                             </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <button type="submit" class="form-control btn btn-primary" >Submit</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="reset" class="form-control btn btn-danger" ng-click="stf.resetForm();orgForm.reset();">Reset</button>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--/col-->
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Employee List
+                </div>
+                <div class="card-block">
+                    <form name="search-form" ng-submit="stf.getOrgList()">
+                    <div class="form-group row">
+                            <label class="col-md-2 form-control-label" for="text-input">Search</label>
+                            <div class="col-md-5">
+                                <select class="form-control" placeholder="Search" name="search-option"
+                                        ng-model="stf.searchOption"
+                                        ng-options="item as item.toUpperCase() for item in stf.searchable"
+                                        ng-init="stf.searchOption=stf.searchable[0]">
+                                    <option value="" style="display:none">Choose One</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" name="srch-term" ng-model="stf.searchTerm">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pis No.</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Phone</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat = "orgn in stf.orgList">
+                                <td>{{ orgn.pis_no }}</td>
+                                <td>{{ orgn.name }}</td>
+                                <td>{{ orgn.email }}</td>
+                                <td>{{ orgn.mobile_no }}</td>
+                                <td>{{ orgn.phone_no }}</td>
+                                <td>
+                                    <div class="row">
+                                    <button class="btn btn-info btn-sm pull-left" title="Edit" ng-click="stf.editForm(orgn.id)"><i class="icon-pencil"></i></button>
+                                    <button class="btn btn-danger btn-sm pull-left" title="Delete" style="margin-left: 4px;"><i class="icon-trash icon-white"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <ul uib-pagination 
+                        boundary-links="true" 
+                        total-items="stf.totalItems" 
+                        ng-model="stf.currentPage"
+                        items-per-page="stf.perPage"
+                        class="pagination-sm col-md-9"
+                        ng-change ="stf.getOrgList()"
+                        previous-text="&lsaquo;" 
+                        next-text="&rsaquo;" 
+                        first-text="&laquo;" 
+                        last-text="&raquo;">
+                    </ul>
+                        <div class="form-group col-md-3"></div>
+                        <label class="form-group">Per Page</label>
+                        <select ng-model="stf.reqPerPage" ng-change="stf.getOrgList()" 
+                                ng-init="stf.reqPerPage = stf.perPageOptions[0]"
+                                ng-options="item for item in stf.perPageOptions">
+                            <option value="" style="display: none"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+</div>

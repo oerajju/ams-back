@@ -1,0 +1,106 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    Create Organization Ownerships
+                </div>
+                <div class="card-block">
+                    <form class="form-horizontal" name="orgForm" novalidate angular-validator-submit="own.submitForm()"  angular-validator>
+                        <input type="hidden" ng-model="own.formModel.id">
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Name</label>
+                            <div class="col-md-9">
+                                <input type="text"   class="form-control" placeholder="Name" ng-model="own.formModel.name" required required-message="'Name is required.'" validate-on="blur" name="name">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <button type="submit" class="form-control btn btn-primary" >Submit</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="reset" class="form-control btn btn-danger" ng-click="org.resetForm();orgForm.reset();">Reset</button>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--/col-->
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Ownerships
+                </div>
+                <div class="card-block">
+                    <form name="search-form" ng-submit="own.getOrgList()">
+                    <div class="form-group row">
+                            <label class="col-md-2 form-control-label" for="text-input">Search</label>
+                            <div class="col-md-5">
+                                <select class="form-control" placeholder="Search" name="search-option"
+                                        ng-model="own.searchOption"
+                                        ng-options="item as item.toUpperCase() for item in own.searchable"
+                                        ng-init="own.searchOption=own.searchable[0]">
+                                    <option value="" style="display:none">Choose One</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" name="srch-term" ng-model="own.searchTerm">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat = "orgn in own.orgList">
+                                <td>{{ orgn.name }}</td>
+                                <td>
+                                    <div class="row">
+                                    <button class="btn btn-info btn-sm pull-left" title="Edit" ng-click="own.editForm(orgn.id)"><i class="icon-pencil"></i></button>
+                                    <button class="btn btn-danger btn-sm pull-left" title="Delete" style="margin-left: 4px;"><i class="icon-trash icon-white"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <ul uib-pagination 
+                        boundary-links="true" 
+                        total-items="own.totalItems" 
+                        ng-model="own.currentPage"
+                        items-per-page="own.perPage"
+                        class="pagination-sm col-md-9"
+                        ng-change ="own.getOrgList()"
+                        previous-text="&lsaquo;" 
+                        next-text="&rsaquo;" 
+                        first-text="&laquo;" 
+                        last-text="&raquo;">
+                    </ul>
+                        <div class="form-group col-md-3"></div>
+                        <label class="form-group">Per Page</label>
+                        <select ng-model="own.reqPerPage" ng-change="own.getOrgList()" 
+                                ng-init="own.reqPerPage = own.perPageOptions[0]"
+                                ng-options="item for item in own.perPageOptions">
+                            <option value="" style="display: none"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+</div>
