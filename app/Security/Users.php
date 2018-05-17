@@ -10,12 +10,14 @@ class Users extends BaseModel
 {
     public $timestamps = false;
     protected $table = 'users';
-    protected $fillable = ['name','email','password'];
+    protected $fillable = ['name','email','orgid','empid'];
     public $searchable = ['id','name','email'];
     
     public $rules = [
-          'name'=> 'required',
-          'email'=> 'required|email|unique:users,email',
+        'orgid'=>'integer',
+        'empid'=>'integer',
+          //'name'=> 'required',
+          //'email'=> 'required|email|unique:users,email',
           'password'=> 'required|confirmed',
      ];
     

@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Organization;
+namespace App\Http\Controllers\Attendence;
 
 use Illuminate\Http\Request;
-use App\Organization\Employee;
+use App\Attendence\Log;
 use App\Http\Controllers\Controller;
-use DB;
-use Auth;
-use App\Security\Users;
-class EmployeeController extends Controller
+
+class LogController extends Controller
 {
+    public function __construct() {
+        $this->middleware('jwt.auth', ['except' => ['store','index',]]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +19,7 @@ class EmployeeController extends Controller
     public function index(Request $r)
     {
         $input = (object) $r->query();
-        $model = new Employee();
+        $model = new Log();
         $models = $model->retriveData($input);
         return response()->json($models);
     }
@@ -41,21 +42,11 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $model = new Employee();
+        $model = new Log();
         if ($model->validate($request->all())) {
-            $req = $request->all();
-            $model->fill($req);
-            if($model->reports_to == ''){
-                $model->reports_to=0;
-            }
-            if($model->cnt_start_date == ''){
-                $model->cnt_start_date=0;
-            }
-            if($model->cnt_term_date == ''){
-                $model->cnt_term_date=0;
-            }
-            $model->save();
-            return response()->json($model);
+            $model = Log::create($request->all());
+            return "OK";
+            //return response()->json($model);
         } else {
             return response()->json($model->errors, 500);
         }
@@ -80,7 +71,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $model = Employee::find($id);
+        $model = Log::find($id);
         return response()->json($model);
     }
 
@@ -93,21 +84,12 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $model = new Employee();
+        $model = new Log();
         if ($model->validate($request->except(['id']))) {
             unset($model);
-            $model = Employee::find($id);
+            $model = Log::find($id);
             $req = $request->except(['id']);
             $model->fill($req);
-            if($model->reports_to == ''){
-                $model->reports_to=0;
-            }
-            if($model->cnt_start_date == ''){
-                $model->cnt_start_date=0;
-            }
-            if($model->cnt_term_date == ''){
-                $model->cnt_term_date=0;
-            }
             $model->save();
             return response()->json($model);
         } else {
@@ -123,33 +105,12 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-       if(Employee::find($id)->delete()){
+       if(Log::find($id)->delete()){
 		   return response()->json('Deleted');
 	   }else{
 		   return response()->json('Internal Error', 500);
 	   }
 		
-    }
-    
-    public function listEmployeeByOrg($orgid){
-        $data = Employee::select(DB::raw("id,concat(firstname,' ',midname,' ',lastname) as name"))
-        ->where('orgid','=',$orgid)->get();
-        if(!empty($data)){
-            return response()->json($data);
-        }else{
-            return response()->json([]);
-        }
-    }
-    
-    public function getEmployeeInfoByUserId()
-    {
-        $id = Auth::user()->id;
-        $user = new Users();
-        $user = Users::select('empid')->where('id', $id)->first();
-        //return $user->empid;
-        $emp = Employee::select('firstname','lastname','midname','email','phone','address')->where('id',$user->empid)->first();
-        return $emp;
-
     }
 }
 

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Security\Users;
 use Validator;
 use App\Http\Controllers\Controller;
+use App\Organization\Employee;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -42,7 +44,13 @@ class UsersController extends Controller
     {
         $model = new Users();
         if ($model->validate($request->all())) {
-            $model = Users::create($request->all());
+            //$model = Users::create($request->all());
+            $model->fill($request->all());
+            $employee = Employee::where('id','=',$request->input('empid'))->first();
+            $model->name = $employee->firstname." ".$employee->midname." ".$employee->lastname;
+            $model->email = $employee->email;
+            $model->password = Hash::make($request->input('password'));
+            $model->save();
             return response()->json($model);
         } else {
             return response()->json($model->errors, 500);

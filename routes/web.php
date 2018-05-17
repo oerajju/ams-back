@@ -57,6 +57,7 @@ Route::group(['prefix' => 'organization','namespace'=>'Organization'], function(
     
     Route::resource('post','PostController');
     Route::get('employee/list/{orgid}','EmployeeController@listEmployeeByOrg');
+    Route::get('employeeuser','EmployeeController@getEmployeeInfoByUserId');
     Route::resource('employee','EmployeeController');
     
 });

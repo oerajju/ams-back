@@ -21,7 +21,7 @@ class EmpMachineController extends Controller
             ['oe.id','o.name as oname','m.name as mname','e.firstname','e.midname','e.lastname','oe.status','oe.machine_userid'],
             [
                 [$model->getTable().' as oe'],
-                ['organization as o',['o.id','oe.org_id'],
+                ['organization as o',['o.id','oe.org_id']],
                 ['machine as m',['m.id','oe.machine_id']],
                 ['employee as e',['e.id','oe.emp_id']]
             ]

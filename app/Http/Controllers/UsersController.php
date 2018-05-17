@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Users;
+use App\Security\Users;
+use App\Organization\Employee;
+use Hash;
 
 class UsersController extends Controller
 {
@@ -40,7 +42,15 @@ class UsersController extends Controller
     {
         $model = new Users();
         if ($model->validate($request->all())) {
-            $model = Users::create($request->all());
+            $model->fill($request->all());
+            print_r($request->all());exit;
+            $employee = Employee::where('id','=',$request->input('empid'))->first();
+            print_r($employee);exit;
+            $model->name = $employee->firstname." ".$employee->midname." ".$employee->lastname;
+            $model->email = $employee->email;
+            $model->password = Hash::make($request->input('password'));
+            $model->save();
+            //$model = Users::create($request->all());
             return response()->json($model);
         } else {
             return response()->json($model->errors, 500);

@@ -7,7 +7,7 @@ use App\BaseModel;
 class Employee extends BaseModel
 {
     protected $table = 'employee';
-    protected $fillable = ['firstname','midname','lastname','address','phone','email','reports_to','cnt_start_date','cnt_term_date','orgid'];
+    protected $fillable = ['firstname','midname','lastname','address','phone','email','reports_to','cnt_start_date','cnt_term_date','orgid','postid'];
     public $searchable = ['firstname','midname','lastname','address','phone','email'];
     
     public $rules = [
@@ -21,6 +21,7 @@ class Employee extends BaseModel
           'reports_to'=> 'integer|nullable',
           'cnt_start_date'=> 'integer|nullable',
           'cnt_term_date'=> 'integer|nullable',
-        'orgid'=>'integer'
+          'orgid'=>'integer',
+          'postid'=>'integer|nullable'
      ];
 }

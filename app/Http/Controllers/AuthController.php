@@ -83,17 +83,32 @@ class AuthController extends Controller {
     }
     
     public function changePassword(Request $request){
-        $userId = JWTAuth::parseToken()->authenticate()->id;
-        if($request->new_password == $request->cnew_password){
+        //return $request->except(['token']);
+       // $old_password = $request->oldpassword;
+
+         $userId = JWTAuth::parseToken()->authenticate()->id;
+        if($request->password == $request->password_confirmation){
             $user = new User();
-            if($user->changePassword($userId,$request->old_password,$request->new_password)){
+            if($user->changePassword($userId,$request->oldpassword,$request->password_confirmation)){
                 return response()->json(['message'=>"Password Successfully Changed."]);
             }else{
-                return response()->json(['message'=>"Wrong Old Password"],500);
+                return response()->json(['error' => "Wrong Old Password"]);
             }
         }else{
             return response()->json(['message'=>"New and Confirm Password Does not match."],500);
         }
+
+        // $userId = JWTAuth::parseToken()->authenticate()->id;
+        // if($request->new_password == $request->cnew_password){
+        //     $user = new User();
+        //     if($user->changePassword($userId,$request->old_password,$request->new_password)){
+        //         return response()->json(['message'=>"Password Successfully Changed."]);
+        //     }else{
+        //         return response()->json(['message'=>"Wrong Old Password"],500);
+        //     }
+        // }else{
+        //     return response()->json(['message'=>"New and Confirm Password Does not match."],500);
+        // }
     }
     public function emailExists(Request $r){
         if($r->email!=''){

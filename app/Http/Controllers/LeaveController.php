@@ -43,7 +43,7 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
-        $empId = Auth::user()->id;
+        $userId = Auth::user()->id;
         $model = new Leave();
         if ($model->validate($request->all())) {
             $req = $request->all();
@@ -51,7 +51,7 @@ class LeaveController extends Controller
             $start = Carbon::parse($request['date_from']);
             $dayCount = $end->diffInDays($start);
             $model->fill($req);
-            $model->emp_id = $empId;
+            $model->user_id = $userId;
             $model->day_count= $dayCount + 1;
             $model->save();
             return response()->json($model);
@@ -100,6 +100,22 @@ class LeaveController extends Controller
     public function update(Request $request, $id)
     {
         $model = new Leave();
+        $status= $request->input(['status']);
+        if($status == '2')
+        {
+            $model=Leave::find($id);
+            $model->status ='2';
+            $model->save();
+            return $model;
+        }
+        if($status == '3')
+        {
+           $model=Leave::find($id);
+            $model->status ='3';
+            $model->save();
+            return $model;
+        }
+        else{
         // $model->rules['machine_id'] = 'required|unique:machine,machine_id,'.$id;
          if ($model->validate($request->except(['id']))) {
              unset($model);
@@ -110,6 +126,7 @@ class LeaveController extends Controller
              return response()->json($model);
          } else {
              return response()->json($this->errorMessage($model->errors), 500);
+         }
          }
     }
 
@@ -136,8 +153,21 @@ class LeaveController extends Controller
     //     }
     // }
 
-    public function leaveApproval(){
-       // $model = new Machine();
-       // return $model->getMachineByOrg($orgid);
+    public function leaveApproval(Request $r){
+        $input = (object) $r->query();
+        $model = new Leave();
+        $models = $model->retreiveDataCustom(
+            $input,
+            ['l.id','u.name as uname','l.leave_type as ltype','l.reason as lreason','l.date_from as ldfrom','l.date_to as ldto','l.day_count as ldcount','l.status as lstatus','p.name as postname'],
+            [
+                [$model->getTable().' as l'],
+                ['users as u',['u.id','l.user_id']],
+                ['employee as em',['em.id','u.empid']],
+                ['post as p',['p.id','em.postid']]
+            ]
+            
+        );
+        //$models = $models->get();
+        return response()->json($models);
     }
 }
